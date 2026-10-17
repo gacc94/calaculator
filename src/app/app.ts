@@ -155,7 +155,6 @@ export class App {
 	}
 
 	openDrawer(): void {
-		this.haptics.impact('light');
 		this.isDrawerOpen.set(true);
 	}
 

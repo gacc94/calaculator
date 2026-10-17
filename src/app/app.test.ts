@@ -104,3 +104,16 @@ test('switches to history mode and returns to calculator', async () => {
 	expect(screen.getByRole('button', { name: 'Open menu drawer' })).toBeTruthy();
 	expect(screen.getByRole('button', { name: '=' })).toBeTruthy();
 });
+
+test('closes drawer when pressing close button', async () => {
+	await render(App);
+	const user = userEvent.setup();
+
+	// Open drawer
+	await user.press(screen.getByRole('button', { name: 'Open menu drawer' }));
+	expect(screen.getByRole('button', { name: 'Close drawer' })).toBeTruthy();
+
+	// Close drawer
+	await user.press(screen.getByRole('button', { name: 'Close drawer' }));
+	expect(screen.getByRole('button', { name: 'Open menu drawer' })).toBeTruthy();
+});

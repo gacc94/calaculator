@@ -10,12 +10,18 @@ import { Text, View } from '@ng-native/components';
 	template: `
 		<view class="gap-1.5">
 			@for (item of history(); track $index) {
-				<text class="calc-history-text">{{ item }}</text>
+				<text class="text-right text-[17px] font-normal text-[#8B95A5] dark:text-[#5E6678]">
+					{{ item }}
+				</text>
 			}
 		</view>
 
 		<view class="mt-2">
-			<text class="calc-main-text" nativeID="calc-display-value" [numberOfLines]="1">
+			<text
+				class="text-right text-[54px] font-light text-[#1A1F2C] dark:text-white"
+				nativeID="calc-display-value"
+				[numberOfLines]="1"
+			>
 				{{ currentValue() }}
 			</text>
 		</view>

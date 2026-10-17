@@ -17,15 +17,19 @@ import { CalculatorService } from './calculator/calculator.service';
 	},
 	template: `
 		<safe-area-provider>
-			<safe-area-view class="calc-screen">
+			<safe-area-view class="flex-1 bg-[#E8EBF2] dark:bg-[#000000]">
 				<!-- Header Actions -->
 				<view class="flex-row items-center justify-between px-6 pt-2 pb-4">
-					<pressable class="calc-header-btn" accessibilityRole="button" accessibilityLabel="Voice input">
+					<pressable
+						class="h-13 w-13 items-center justify-center rounded-[20px] bg-[#CBD3E2] active:opacity-75 dark:bg-[#252A3D]"
+						accessibilityRole="button"
+						accessibilityLabel="Voice input"
+					>
 						<ng-icon name="lucideMic" [size]="24" [color]="headerIconColor()" />
 					</pressable>
 
 					<pressable
-						class="calc-header-btn"
+						class="h-13 w-13 items-center justify-center rounded-[20px] bg-[#CBD3E2] active:opacity-75 dark:bg-[#252A3D]"
 						accessibilityRole="button"
 						accessibilityLabel="Toggle Dark and Light mode"
 						(press)="toggleTheme()"

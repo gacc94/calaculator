@@ -7,7 +7,7 @@ export type CalculatorButtonVariant = 'num' | 'fn' | 'op';
 	selector: 'app-calculator-button',
 	imports: [Pressable, Text],
 	host: {
-		'[class]': 'isWide() ? "calc-btn-wide" : "flex-1"',
+		'[class]': 'isWide() ? "flex-[2]" : "flex-1"',
 	},
 	template: `
 		<pressable
@@ -32,24 +32,24 @@ export class CalculatorButton {
 		const base = 'h-[72px] w-full items-center justify-center rounded-[24px]';
 		switch (this.variant()) {
 			case 'op':
-				return `${base} calc-btn-op`;
+				return `${base} bg-[#E87A38] active:bg-[#CF6526]`;
 			case 'fn':
-				return `${base} calc-btn-fn`;
+				return `${base} bg-[#B8C2D3] active:bg-[#A6B1C4] dark:bg-[#2D334A] dark:active:bg-[#23283B]`;
 			case 'num':
 			default:
-				return `${base} calc-btn-num`;
+				return `${base} bg-[#CBD3E2] active:bg-[#B9C2D3] dark:bg-[#1E2335] dark:active:bg-[#161A28]`;
 		}
 	});
 
 	protected readonly textClass = computed(() => {
 		switch (this.variant()) {
 			case 'op':
-				return 'calc-btn-op-text';
+				return 'text-[30px] font-medium text-white';
 			case 'fn':
-				return 'calc-btn-fn-text';
+				return 'text-[26px] font-medium text-[#1A1F2C] dark:text-[#C8D2E4]';
 			case 'num':
 			default:
-				return 'calc-btn-num-text';
+				return 'text-[28px] font-medium text-[#1A1F2C] dark:text-[#E2E8F0]';
 		}
 	});
 }

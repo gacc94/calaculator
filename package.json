@@ -6,9 +6,12 @@
 	"dependencies": {
 		"@angular/common": "^22.0.0",
 		"@angular/core": "^22.0.0",
+		"@ng-icons/core": "^36.1.0",
+		"@ng-icons/lucide": "^36.1.0",
 		"@ng-native/components": "0.15.0",
 		"@ng-native/device": "0.15.0",
 		"@ng-native/fabric": "0.15.0",
+		"@ng-native/icons": "0.15.0",
 		"@ng-native/metro": "0.15.0",
 		"@ng-native/platform": "0.15.0",
 		"@ng-native/tailwind": "0.15.0",
@@ -17,7 +20,8 @@
 		"expo-system-ui": "~57.0.4",
 		"react": "19.2.3",
 		"react-native": "0.86.3",
-		"react-native-safe-area-context": "~5.7.0"
+		"react-native-safe-area-context": "~5.7.0",
+		"react-native-svg": "15.15.4"
 	},
 	"devDependencies": {
 		"@angular/compiler-cli": "^22.0.0",

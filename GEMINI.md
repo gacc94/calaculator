@@ -13,6 +13,7 @@ This repository is an Angular Native mobile application targeting iOS and Androi
 - **Testing**: Vitest v5 (`@ng-native/testing` in Node against a mock native layer — no simulator required)
 - **Bundler**: Metro (`metro.config.js` wrapped in `withTailwind`)
 - **Styling**: Tailwind CSS v4 (`@ng-native/tailwind`, `tailwindcss`, `@tailwindcss/cli`, `src/styles.css`)
+- **Icons**: [@ng-native/icons](https://ng-native.com/packages/icons) v0.15.0 (`@ng-icons/core`, `@ng-icons/lucide`, `react-native-svg` v15.15.4)
 - **Formatting & Style**: Prettier 3.9.10 with `prettier-plugin-tailwindcss` (`.prettierrc`, `.prettierignore`) and EditorConfig (`.editorconfig`) configured with tabs, tab width 4, and max line length 120
 
 ---

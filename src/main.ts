@@ -6,12 +6,14 @@ import { AppRegistry, Image, Platform, processColor } from 'react-native';
 import { mount } from '@ng-native/platform';
 import { currentConditions, deviceTokens, watchConditions } from '@ng-native/device';
 import { getFabricUIManager, registerPlatformComponents } from '@ng-native/fabric';
+import tailwind from '../.angular-native/app.tailwind.js';
 import { App } from './app/app.ts';
 
 registerPlatformComponents(Platform.OS);
 
 AppRegistry.registerRunnable('main', ({ rootTag }: { rootTag: number | string }) => {
 	const app = mount(Number(rootTag), App, getFabricUIManager(), {
+		globalStyles: tailwind,
 		// Colours, as the integers the platform wants.
 		processColor,
 		// What `@media` resolves against. Without it every media query is false and a responsive

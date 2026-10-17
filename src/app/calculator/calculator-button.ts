@@ -27,6 +27,7 @@ export class CalculatorButton {
 	readonly label = input.required<string>();
 	readonly variant = input<CalculatorButtonVariant>('num');
 	readonly isWide = input<boolean>(false);
+	readonly isCompact = input<boolean>(false);
 	readonly accessibilityLabel = input<string>('');
 
 	readonly press = output<void>();
@@ -37,7 +38,8 @@ export class CalculatorButton {
 	}
 
 	protected readonly buttonClass = computed(() => {
-		const base = 'h-[72px] w-full items-center justify-center rounded-[24px]';
+		const heightAndRadius = this.isCompact() ? 'h-[50px] rounded-[18px]' : 'h-[72px] rounded-[24px]';
+		const base = `${heightAndRadius} w-full items-center justify-center`;
 		switch (this.variant()) {
 			case 'op':
 				return `${base} bg-[#E87A38] active:bg-[#CF6526]`;
@@ -50,6 +52,17 @@ export class CalculatorButton {
 	});
 
 	protected readonly textClass = computed(() => {
+		if (this.isCompact()) {
+			switch (this.variant()) {
+				case 'op':
+					return 'text-[20px] font-medium text-white';
+				case 'fn':
+					return 'text-[18px] font-medium text-btn-fn-text';
+				case 'num':
+				default:
+					return 'text-[20px] font-medium text-btn-num-text';
+			}
+		}
 		switch (this.variant()) {
 			case 'op':
 				return 'text-[30px] font-medium text-white';

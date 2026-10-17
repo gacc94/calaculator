@@ -119,6 +119,48 @@ export class CalculatorService {
 		this.currentValue.set(result);
 	}
 
+	scientificOperation(op: 'sin' | 'cos' | 'tan' | 'sqrt' | 'pi'): void {
+		if (op === 'pi') {
+			this.currentValue.set(Math.PI.toFixed(6).replace(/\.?0+$/, ''));
+			this.waitingForOperand.set(true);
+			return;
+		}
+
+		const current = parseFloat(this.currentValue());
+		if (isNaN(current)) {
+			return;
+		}
+
+		let res = 0;
+		switch (op) {
+			case 'sin':
+				res = Math.sin(current);
+				break;
+			case 'cos':
+				res = Math.cos(current);
+				break;
+			case 'tan':
+				res = Math.tan(current);
+				break;
+			case 'sqrt':
+				if (current < 0) {
+					this.currentValue.set('Error');
+					return;
+				}
+				res = Math.sqrt(current);
+				break;
+		}
+
+		const clean = parseFloat(res.toFixed(8));
+		this.pushHistory(`${op}(${current})`);
+		this.currentValue.set(clean.toString());
+		this.waitingForOperand.set(true);
+	}
+
+	clearHistory(): void {
+		this.history.set([]);
+	}
+
 	private performCalculation(prev: number, next: number, op: string): string {
 		let res = 0;
 		switch (op) {
@@ -138,6 +180,9 @@ export class CalculatorService {
 					return 'Error';
 				}
 				res = prev / next;
+				break;
+			case '^':
+				res = Math.pow(prev, next);
 				break;
 			default:
 				return next.toString();
@@ -161,8 +206,8 @@ export class CalculatorService {
 
 	private pushHistory(entry: string): void {
 		const list = [...this.history(), entry];
-		if (list.length > 4) {
-			list.splice(0, list.length - 4);
+		if (list.length > 8) {
+			list.splice(0, list.length - 8);
 		}
 		this.history.set(list);
 	}

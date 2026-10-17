@@ -56,3 +56,51 @@ test('toggles theme between dark and light mode', async () => {
 	await user.press(themeBtn);
 	expect(themeBtn).toBeTruthy();
 });
+
+test('opens drawer and switches to scientific mode', async () => {
+	await render(App);
+	const user = userEvent.setup();
+
+	// Open drawer
+	const menuBtn = screen.getByRole('button', { name: 'Open menu drawer' });
+	await user.press(menuBtn);
+
+	// Verify drawer is open and shows modes
+	expect(screen.getByRole('button', { name: 'Scientific' })).toBeTruthy();
+	expect(screen.getByRole('button', { name: 'Standard' })).toBeTruthy();
+	expect(screen.getByRole('button', { name: 'History' })).toBeTruthy();
+
+	// Select Scientific mode
+	await user.press(screen.getByRole('button', { name: 'Scientific' }));
+
+	// Verify scientific keys appear
+	expect(screen.getByRole('button', { name: 'sin' })).toBeTruthy();
+	expect(screen.getByRole('button', { name: 'cos' })).toBeTruthy();
+	expect(screen.getByRole('button', { name: 'tan' })).toBeTruthy();
+	expect(screen.getByRole('button', { name: '√' })).toBeTruthy();
+	expect(screen.getByRole('button', { name: 'π' })).toBeTruthy();
+
+	// Test scientific operation: π
+	await user.press(screen.getByRole('button', { name: 'π' }));
+	expect(screen.getByText('3.141593')).toBeTruthy();
+});
+
+test('switches to history mode and returns to calculator', async () => {
+	await render(App);
+	const user = userEvent.setup();
+
+	// Open drawer
+	await user.press(screen.getByRole('button', { name: 'Open menu drawer' }));
+
+	// Select History mode
+	await user.press(screen.getByRole('button', { name: 'History' }));
+
+	// Verify History screen is showing
+	expect(screen.getByText('Calculation Log')).toBeTruthy();
+	expect(screen.getByRole('button', { name: 'Return to calculator' })).toBeTruthy();
+
+	// Return back to standard calculator
+	await user.press(screen.getByRole('button', { name: 'Return to calculator' }));
+	expect(screen.getByRole('button', { name: 'Open menu drawer' })).toBeTruthy();
+	expect(screen.getByRole('button', { name: '=' })).toBeTruthy();
+});

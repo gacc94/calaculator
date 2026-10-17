@@ -26,10 +26,15 @@
 	--color-btn-fn-active: #a6b1c4;
 	--color-btn-fn-text: #1a1f2c;
 
+	--color-btn-op: #3b82f6;
+	--color-btn-op-active: #2563eb;
+
 	--color-btn-header: #cbd3e2;
 	--color-icon-header: #555e6d;
 	--color-text-history: #8b95a5;
+	--color-text-muted: #64748b;
 	--color-text-main: #1a1f2c;
+	--color-border-subtle: #d5dce8;
 }
 
 /* Dark Theme Tokens */
@@ -43,10 +48,15 @@
 	--color-btn-fn-active: #23283b;
 	--color-btn-fn-text: #c8d2e4;
 
+	--color-btn-op: #3b82f6;
+	--color-btn-op-active: #2563eb;
+
 	--color-btn-header: #252a3d;
 	--color-icon-header: #8e99ac;
 	--color-text-history: #5e6678;
+	--color-text-muted: #8e99ac;
 	--color-text-main: #ffffff;
+	--color-border-subtle: #252a3d;
 }
 
 /* Expose Semantic Design Tokens to Tailwind Utilities */
@@ -62,10 +72,15 @@
 	--color-btn-fn-active: var(--color-btn-fn-active);
 	--color-btn-fn-text: var(--color-btn-fn-text);
 
+	--color-btn-op: var(--color-btn-op);
+	--color-btn-op-active: var(--color-btn-op-active);
+
 	--color-btn-header: var(--color-btn-header);
 	--color-icon-header: var(--color-icon-header);
 	--color-text-history: var(--color-text-history);
+	--color-text-muted: var(--color-text-muted);
 	--color-text-main: var(--color-text-main);
+	--color-border-subtle: var(--color-border-subtle);
 }
 
 text {

@@ -34,10 +34,10 @@ export class CalculatorButton {
 			case 'op':
 				return `${base} bg-[#E87A38] active:bg-[#CF6526]`;
 			case 'fn':
-				return `${base} bg-[#B8C2D3] active:bg-[#A6B1C4] dark:bg-[#2D334A] dark:active:bg-[#23283B]`;
+				return `${base} bg-btn-fn active:bg-btn-fn-active`;
 			case 'num':
 			default:
-				return `${base} bg-[#CBD3E2] active:bg-[#B9C2D3] dark:bg-[#1E2335] dark:active:bg-[#161A28]`;
+				return `${base} bg-btn-num active:bg-btn-num-active`;
 		}
 	});
 
@@ -46,10 +46,10 @@ export class CalculatorButton {
 			case 'op':
 				return 'text-[30px] font-medium text-white';
 			case 'fn':
-				return 'text-[26px] font-medium text-[#1A1F2C] dark:text-[#C8D2E4]';
+				return 'text-[26px] font-medium text-btn-fn-text';
 			case 'num':
 			default:
-				return 'text-[28px] font-medium text-[#1A1F2C] dark:text-[#E2E8F0]';
+				return 'text-[28px] font-medium text-btn-num-text';
 		}
 	});
 }

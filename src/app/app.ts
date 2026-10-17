@@ -17,11 +17,11 @@ import { CalculatorService } from './calculator/calculator.service';
 	},
 	template: `
 		<safe-area-provider>
-			<safe-area-view class="flex-1 bg-[#E8EBF2] dark:bg-[#000000]">
+			<safe-area-view class="flex-1 bg-screen-bg">
 				<!-- Header Actions -->
 				<view class="flex-row items-center justify-between px-6 pt-2 pb-4">
 					<pressable
-						class="h-13 w-13 items-center justify-center rounded-[20px] bg-[#CBD3E2] active:opacity-75 dark:bg-[#252A3D]"
+						class="h-13 w-13 items-center justify-center rounded-[20px] bg-btn-header active:opacity-75"
 						accessibilityRole="button"
 						accessibilityLabel="Voice input"
 					>
@@ -29,7 +29,7 @@ import { CalculatorService } from './calculator/calculator.service';
 					</pressable>
 
 					<pressable
-						class="h-13 w-13 items-center justify-center rounded-[20px] bg-[#CBD3E2] active:opacity-75 dark:bg-[#252A3D]"
+						class="h-13 w-13 items-center justify-center rounded-[20px] bg-btn-header active:opacity-75"
 						accessibilityRole="button"
 						accessibilityLabel="Toggle Dark and Light mode"
 						(press)="toggleTheme()"

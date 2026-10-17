@@ -15,8 +15,57 @@
 	font-style: italic;
 }
 
+/* Light Theme Tokens (Default) */
+:root {
+	--color-screen-bg: #e8ebf2;
+	--color-btn-num: #cbd3e2;
+	--color-btn-num-active: #b9c2d3;
+	--color-btn-num-text: #1a1f2c;
+
+	--color-btn-fn: #b8c2d3;
+	--color-btn-fn-active: #a6b1c4;
+	--color-btn-fn-text: #1a1f2c;
+
+	--color-btn-header: #cbd3e2;
+	--color-icon-header: #555e6d;
+	--color-text-history: #8b95a5;
+	--color-text-main: #1a1f2c;
+}
+
+/* Dark Theme Tokens */
+.dark {
+	--color-screen-bg: #000000;
+	--color-btn-num: #1e2335;
+	--color-btn-num-active: #161a28;
+	--color-btn-num-text: #e2e8f0;
+
+	--color-btn-fn: #2d334a;
+	--color-btn-fn-active: #23283b;
+	--color-btn-fn-text: #c8d2e4;
+
+	--color-btn-header: #252a3d;
+	--color-icon-header: #8e99ac;
+	--color-text-history: #5e6678;
+	--color-text-main: #ffffff;
+}
+
+/* Expose Semantic Design Tokens to Tailwind Utilities */
 @theme {
 	--font-sans: 'Plus Jakarta Sans';
+
+	--color-screen-bg: var(--color-screen-bg);
+	--color-btn-num: var(--color-btn-num);
+	--color-btn-num-active: var(--color-btn-num-active);
+	--color-btn-num-text: var(--color-btn-num-text);
+
+	--color-btn-fn: var(--color-btn-fn);
+	--color-btn-fn-active: var(--color-btn-fn-active);
+	--color-btn-fn-text: var(--color-btn-fn-text);
+
+	--color-btn-header: var(--color-btn-header);
+	--color-icon-header: var(--color-icon-header);
+	--color-text-history: var(--color-text-history);
+	--color-text-main: var(--color-text-main);
 }
 
 text {

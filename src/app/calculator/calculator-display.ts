@@ -10,7 +10,7 @@ import { Text, View } from '@ng-native/components';
 	template: `
 		<view class="gap-1.5">
 			@for (item of history(); track $index) {
-				<text class="text-right text-[17px] font-normal text-[#8B95A5] dark:text-[#5E6678]">
+				<text class="text-right text-[17px] font-normal text-text-history">
 					{{ item }}
 				</text>
 			}
@@ -18,7 +18,7 @@ import { Text, View } from '@ng-native/components';
 
 		<view class="mt-2">
 			<text
-				class="text-right text-[54px] font-light text-[#1A1F2C] dark:text-white"
+				class="text-right text-[54px] font-light text-text-main"
 				nativeID="calc-display-value"
 				[numberOfLines]="1"
 			>

@@ -14,14 +14,14 @@ browser-only parts do not: there is no `NgOptimizedImage` (use `<image>`), and n
 ## Commands
 
 ```sh
-npm start           # Metro; press i or a for a simulator, or scan the QR code with Expo Go
-npm run ios         # the iOS simulator
-npm run android     # the Android emulator
-npm test            # Vitest, in Node against a fake native layer: no simulator needed
-npm run typecheck
+bun run start           # Metro; press i or a for a simulator, or scan the QR code with Expo Go
+bun run ios         # the iOS simulator
+bun run android     # the Android emulator
+bun test            # Vitest, in Node against a fake native layer: no simulator needed
+bun run typecheck
 ```
 
-`src/main.ts` mounts the root component, `src/app/app.ts`. Run `npm test` and `npm run typecheck` after a
+`src/main.ts` mounts the root component, `src/app/app.ts`. Run `bun run test` and `bun run typecheck` after a
 change; both are fast.
 
 ## Rules that are easy to get wrong

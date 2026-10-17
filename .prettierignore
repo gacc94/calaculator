@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build and Expo output
+.expo/
+dist/
+build/
+.angular-native/
+expo-env.d.ts
+
+# Native directories
+ios/
+android/
+.kotlin/
+
+# Lock files and cache
+bun.lock
+package-lock.json
+yarn.lock
+*.tsbuildinfo
+.metro-health-check*
+
+# Coverage and logs
+coverage/
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# OS and environment files
+.DS_Store
+.env*
+

@@ -22,3 +22,56 @@
 text {
 	font-family: 'Plus Jakarta Sans';
 }
+
+/* Calculator Screen & Header */
+@utility calc-screen {
+	@apply flex-1 bg-[#E8EBF2] dark:bg-[#000000];
+}
+
+@utility calc-header-btn {
+	@apply h-13 w-13 items-center justify-center rounded-[20px] bg-[#CBD3E2] active:opacity-75 dark:bg-[#252A3D];
+}
+
+/* Calculator Display */
+@utility calc-history-text {
+	@apply text-right text-[17px] font-normal text-[#8B95A5] dark:text-[#5E6678];
+}
+
+@utility calc-main-text {
+	@apply text-right text-[54px] font-light text-[#1A1F2C] dark:text-white;
+}
+
+/* Calculator Buttons */
+@utility calc-btn-base {
+	@apply h-[72px] flex-1 items-center justify-center rounded-[24px];
+}
+
+@utility calc-btn-wide {
+	flex-grow: 2;
+	flex-shrink: 2;
+	flex-basis: 0%;
+}
+
+@utility calc-btn-num {
+	@apply bg-[#CBD3E2] active:bg-[#B9C2D3] dark:bg-[#1E2335] dark:active:bg-[#161A28];
+}
+
+@utility calc-btn-num-text {
+	@apply text-[28px] font-medium text-[#1A1F2C] dark:text-[#E2E8F0];
+}
+
+@utility calc-btn-fn {
+	@apply bg-[#B8C2D3] active:bg-[#A6B1C4] dark:bg-[#2D334A] dark:active:bg-[#23283B];
+}
+
+@utility calc-btn-fn-text {
+	@apply text-[26px] font-medium text-[#1A1F2C] dark:text-[#C8D2E4];
+}
+
+@utility calc-btn-op {
+	@apply bg-[#E87A38] active:bg-[#CF6526];
+}
+
+@utility calc-btn-op-text {
+	@apply text-[30px] font-medium text-white;
+}

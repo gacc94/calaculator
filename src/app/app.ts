@@ -1,50 +1,87 @@
-import { Component, inject, signal } from '@angular/core';
-import { Pressable, SafeAreaProvider, SafeAreaView, Text, View } from '@ng-native/components';
+import { Component, computed, inject, signal } from '@angular/core';
+import { Pressable, SafeAreaProvider, SafeAreaView, View } from '@ng-native/components';
 import { ColorScheme, StatusBar } from '@ng-native/device';
 import { NgIcon } from '@ng-native/icons';
 import { provideIcons } from '@ng-icons/core';
-import { lucideCalculator } from '@ng-icons/lucide';
+import { lucideMic, lucideMoon, lucideSun } from '@ng-icons/lucide';
+import { CalculatorDisplay } from './calculator/calculator-display';
+import { CalculatorKeypad } from './calculator/calculator-keypad';
+import { CalculatorService } from './calculator/calculator.service';
 
-/**
- * Element names are lowercase, and that is load-bearing rather than style: an uppercase name is
- * read as an unknown Angular component and commits as a plain view with nothing in it.
- */
 @Component({
+	selector: 'app-root',
+	imports: [CalculatorDisplay, CalculatorKeypad, NgIcon, Pressable, SafeAreaProvider, SafeAreaView, View],
+	providers: [provideIcons({ lucideMic, lucideMoon, lucideSun })],
 	host: {
 		class: 'flex-1',
 	},
-	imports: [NgIcon, Pressable, SafeAreaProvider, SafeAreaView, Text, View],
-	providers: [provideIcons({ lucideCalculator })],
-	selector: 'app-root',
 	template: `
 		<safe-area-provider>
-			<safe-area-view class="flex-1 bg-[#f5f5f7] dark:bg-[#101014]">
-				<view class="flex-1 justify-center gap-3 p-6">
-					<view class="flex-row items-center gap-3">
-						<ng-icon name="lucideCalculator" [size]="32" color="#3b6ef5" />
-						<text class="text-[28px] font-bold text-[#101014] dark:text-white">Angular, natively</text>
-					</view>
-					<text class="text-[15px] text-[#5f5f6b] dark:text-[#8b8b96]">
-						Real native views. React is never in the render path.
-					</text>
+			<safe-area-view class="calc-screen">
+				<!-- Header Actions -->
+				<view class="flex-row items-center justify-between px-6 pt-2 pb-4">
+					<pressable class="calc-header-btn" accessibilityRole="button" accessibilityLabel="Voice input">
+						<ng-icon name="lucideMic" [size]="24" [color]="headerIconColor()" />
+					</pressable>
 
 					<pressable
+						class="calc-header-btn"
 						accessibilityRole="button"
-						class="mt-2 items-center rounded-full bg-[#3b6ef5] p-7 active:opacity-80"
-						(press)="count.set(count() + 1)"
+						accessibilityLabel="Toggle Dark and Light mode"
+						(press)="toggleTheme()"
 					>
-						<text class="text-base font-semibold text-white">Tapped {{ count() }} times</text>
+						<ng-icon
+							[name]="isDark() ? 'lucideSun' : 'lucideMoon'"
+							[size]="24"
+							[color]="headerIconColor()"
+						/>
 					</pressable>
 				</view>
+
+				<!-- Display Area -->
+				<view class="flex-1 justify-end">
+					<app-calculator-display [history]="calc.history()" [currentValue]="calc.currentValue()" />
+				</view>
+
+				<!-- Keypad Grid -->
+				<app-calculator-keypad
+					(inputDigit)="calc.inputDigit($event)"
+					(inputDecimal)="calc.inputDecimal()"
+					(setOperator)="calc.setOperator($event)"
+					(calculate)="calc.calculate()"
+					(clear)="calc.clear()"
+					(toggleSign)="calc.toggleSign()"
+					(percentage)="calc.percentage()"
+				/>
 			</safe-area-view>
 		</safe-area-provider>
 	`,
 })
 export class App {
-	protected readonly count = signal(0);
+	protected readonly calc = inject(CalculatorService);
+	private readonly colorScheme = inject(ColorScheme);
+	private readonly statusBar = inject(StatusBar);
+
+	readonly isDark = signal(true);
+
+	protected readonly headerIconColor = computed(() => (this.isDark() ? '#8E99AC' : '#555E6D'));
 
 	constructor() {
-		inject(StatusBar).set({ style: 'light', hidden: false, animated: true });
-		inject(ColorScheme).set('dark');
+		this.applyTheme(true);
+	}
+
+	toggleTheme(): void {
+		const nextDark = !this.isDark();
+		this.isDark.set(nextDark);
+		this.applyTheme(nextDark);
+	}
+
+	private applyTheme(dark: boolean): void {
+		this.colorScheme.set(dark ? 'dark' : 'light');
+		this.statusBar.set({
+			style: dark ? 'light' : 'dark',
+			hidden: false,
+			animated: true,
+		});
 	}
 }

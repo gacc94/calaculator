@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Pressable, SafeAreaProvider, SafeAreaView, View } from '@ng-native/components';
 import { ColorScheme, StatusBar } from '@ng-native/device';
+import { Haptics } from '@ng-native/expo/haptics';
 import { NgIcon } from '@ng-native/icons';
 import { provideIcons } from '@ng-icons/core';
 import { lucideMic, lucideMoon, lucideSun } from '@ng-icons/lucide';
@@ -24,6 +25,7 @@ import { CalculatorService } from './calculator/calculator.service';
 						class="h-13 w-13 items-center justify-center rounded-[20px] bg-btn-header active:opacity-75"
 						accessibilityRole="button"
 						accessibilityLabel="Voice input"
+						(press)="onMicPress()"
 					>
 						<ng-icon name="lucideMic" [size]="24" [color]="headerIconColor()" />
 					</pressable>
@@ -65,6 +67,7 @@ export class App {
 	protected readonly calc = inject(CalculatorService);
 	private readonly colorScheme = inject(ColorScheme);
 	private readonly statusBar = inject(StatusBar);
+	private readonly haptics = inject(Haptics);
 
 	readonly isDark = signal(true);
 
@@ -74,7 +77,12 @@ export class App {
 		this.applyTheme(true);
 	}
 
+	onMicPress(): void {
+		this.haptics.impact('light');
+	}
+
 	toggleTheme(): void {
+		this.haptics.impact('light');
 		const nextDark = !this.isDark();
 		this.isDark.set(nextDark);
 		this.applyTheme(nextDark);

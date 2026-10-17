@@ -1,5 +1,6 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { Pressable, Text } from '@ng-native/components';
+import { Haptics } from '@ng-native/expo/haptics';
 
 export type CalculatorButtonVariant = 'num' | 'fn' | 'op';
 
@@ -14,19 +15,26 @@ export type CalculatorButtonVariant = 'num' | 'fn' | 'op';
 			accessibilityRole="button"
 			[accessibilityLabel]="accessibilityLabel() || label()"
 			[class]="buttonClass()"
-			(press)="press.emit()"
+			(press)="onPress()"
 		>
 			<text [class]="textClass()">{{ label() }}</text>
 		</pressable>
 	`,
 })
 export class CalculatorButton {
+	private readonly haptics = inject(Haptics);
+
 	readonly label = input.required<string>();
 	readonly variant = input<CalculatorButtonVariant>('num');
 	readonly isWide = input<boolean>(false);
 	readonly accessibilityLabel = input<string>('');
 
 	readonly press = output<void>();
+
+	protected onPress(): void {
+		this.haptics.impact('light');
+		this.press.emit();
+	}
 
 	protected readonly buttonClass = computed(() => {
 		const base = 'h-[72px] w-full items-center justify-center rounded-[24px]';

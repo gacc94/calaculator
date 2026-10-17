@@ -11,12 +11,14 @@
         "@ng-icons/lucide": "^36.1.0",
         "@ng-native/components": "0.15.0",
         "@ng-native/device": "0.15.0",
+        "@ng-native/expo": "0.15.0",
         "@ng-native/fabric": "0.15.0",
         "@ng-native/icons": "0.15.0",
         "@ng-native/metro": "0.15.0",
         "@ng-native/platform": "0.15.0",
         "@ng-native/tailwind": "0.15.0",
         "expo": "~57.0.26",
+        "expo-font": "~57.0.4",
         "expo-status-bar": "~57.0.1",
         "expo-system-ui": "~57.0.4",
         "react": "19.2.3",
@@ -273,6 +275,8 @@
     "@ng-native/components": ["@ng-native/components@0.15.0", "", { "dependencies": { "@ng-native/device": "0.15.0", "@ng-native/fabric": "0.15.0" }, "peerDependencies": { "@angular/core": "^22.0.0", "@react-native-masked-view/masked-view": ">=0.3.0", "marked": "^18.0.14", "react-native": ">=0.86.0", "react-native-gesture-handler": "^2.32.0", "react-native-keyboard-controller": "^1.21.9", "react-native-reanimated": "^4.5.1", "react-native-safe-area-context": "^5.7.0" }, "optionalPeers": ["@react-native-masked-view/masked-view", "marked", "react-native", "react-native-gesture-handler", "react-native-keyboard-controller", "react-native-reanimated", "react-native-safe-area-context"] }, "sha512-62MZIUfP4Rxk05o/zER3POJL239IcPy/LUprtivJU8sFIKIT31gyTqgXMmroY3FkCGLs0IqPYx0LUmcOdDNt3A=="],
 
     "@ng-native/device": ["@ng-native/device@0.15.0", "", { "dependencies": { "@ng-native/fabric": "0.15.0" }, "peerDependencies": { "@angular/core": "^22.0.0", "react-native": ">=0.86.0" }, "optionalPeers": ["react-native"] }, "sha512-eIkorI6rdwduCpN15Fbs36pc+g+s4Hbp6ai35ujunQQ5VK+gUcQIM22/ilvbKSSAFxRdAzUJTRTVUPUFgZMxoA=="],
+
+    "@ng-native/expo": ["@ng-native/expo@0.15.0", "", { "dependencies": { "@ng-native/fabric": "0.15.0" }, "peerDependencies": { "@angular/core": "^22.0.0", "@expo/ui": "^57.0.0", "@react-native-async-storage/async-storage": "^2.2.0 || ^3.0.0", "expo": "^57.0.0", "expo-apple-authentication": "^57.0.0", "expo-application": "^57.0.0", "expo-asset": "^57.0.0", "expo-audio": "^57.0.0", "expo-background-task": "^57.0.0", "expo-battery": "^57.0.0", "expo-brightness": "^57.0.0", "expo-camera": "^57.0.0", "expo-clipboard": "^57.0.0", "expo-crypto": "^57.0.0", "expo-device": "^57.0.0", "expo-document-picker": "^57.0.0", "expo-file-system": "^57.0.0", "expo-foldables": "^0.1.0", "expo-font": "^57.0.0", "expo-haptics": "^57.0.0", "expo-image-manipulator": "^57.0.0", "expo-image-picker": "^57.0.0", "expo-keep-awake": "^57.0.0", "expo-local-authentication": "^57.0.0", "expo-local-llm": "^0.6.0", "expo-localization": "^57.0.0", "expo-location": "^57.0.0", "expo-maps": "^57.0.0", "expo-media-library": "^57.0.0", "expo-modules-core": "^57.0.0", "expo-network": "^57.0.0", "expo-notifications": "^57.0.0", "expo-screen-capture": "^57.0.0", "expo-screen-orientation": "^57.0.0", "expo-secure-store": "^57.0.0", "expo-sensors": "^57.0.0", "expo-splash-screen": "^57.0.0", "expo-sqlite": "^57.0.0", "expo-store-review": "^57.0.0", "expo-tracking-transparency": "^57.0.0", "expo-updates": "^57.0.0", "expo-video": "^57.0.0", "expo-web-browser": "^57.0.0", "expo-widgets": "^57.0.0", "react-native": ">=0.86.0", "react-native-watch-connectivity": "^2.0.0" }, "optionalPeers": ["@expo/ui", "@react-native-async-storage/async-storage", "expo-apple-authentication", "expo-application", "expo-asset", "expo-audio", "expo-background-task", "expo-battery", "expo-brightness", "expo-camera", "expo-clipboard", "expo-crypto", "expo-device", "expo-document-picker", "expo-file-system", "expo-foldables", "expo-font", "expo-haptics", "expo-image-manipulator", "expo-image-picker", "expo-keep-awake", "expo-local-authentication", "expo-local-llm", "expo-localization", "expo-location", "expo-maps", "expo-media-library", "expo-network", "expo-notifications", "expo-screen-capture", "expo-screen-orientation", "expo-secure-store", "expo-sensors", "expo-splash-screen", "expo-sqlite", "expo-store-review", "expo-tracking-transparency", "expo-updates", "expo-video", "expo-web-browser", "expo-widgets", "react-native-watch-connectivity"] }, "sha512-1iY0M6REFsHwy8EeJ3W6XfhCbSyiwr15Ze0+VHMm9E+k9xcse+OVtkOmdBvemuNAp18sglRXKr0OcqQGJgR0Eg=="],
 
     "@ng-native/fabric": ["@ng-native/fabric@0.15.0", "", {}, "sha512-fOxGKD5dQjb/D7oEx5YOJTlSJXF7cxTKmuMlEP5x4+si6yQRFuXYDmWx7ebO9we9BrVqxKpngn7yDjJp/9SH9g=="],
 

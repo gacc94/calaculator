@@ -28,5 +28,8 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"files.trimTrailingWhitespace": false
 	},
-	"biome.enabled": false
+	"biome.enabled": false,
+	"files.associations": {
+		"*.css": "tailwindcss"
+	}
 }

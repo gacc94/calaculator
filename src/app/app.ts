@@ -44,7 +44,7 @@ export class App {
 	protected readonly count = signal(0);
 
 	constructor() {
-		inject(StatusBar).set({ style: 'light', hidden: true, animated: true });
+		inject(StatusBar).set({ style: 'light', hidden: false, animated: true });
 		inject(ColorScheme).set('dark');
 	}
 }

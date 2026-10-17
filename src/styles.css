@@ -1,3 +1,24 @@
 @import 'tailwindcss/theme.css';
 @import 'tailwindcss/utilities.css';
 @import '@ng-native/tailwind/native.css';
+
+@font-face {
+	font-family: 'Plus Jakarta Sans';
+	src: url('../assets/fonts/PlusJakartaSans-VariableFont_wght.ttf');
+	font-weight: 100 900;
+}
+
+@font-face {
+	font-family: 'Plus Jakarta Sans';
+	src: url('../assets/fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf');
+	font-weight: 100 900;
+	font-style: italic;
+}
+
+@theme {
+	--font-sans: 'Plus Jakarta Sans';
+}
+
+text {
+	font-family: 'Plus Jakarta Sans';
+}

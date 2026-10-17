@@ -6,6 +6,7 @@ node_modules/
 dist/
 build/
 .angular-native/
+.engram/
 expo-env.d.ts
 
 # Native directories

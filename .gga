@@ -1,0 +1,22 @@
+# Gentleman Guardian Angel Configuration
+# Project: calaculator
+
+# AI Provider for code review
+# Options: claude, gemini, codex, opencode, ollama:<model>
+PROVIDER="opencode"
+
+# File patterns to review (comma-separated globs)
+FILE_PATTERNS="*.ts,*.js,*.json,*.html,*.css"
+
+# Patterns to exclude from review
+EXCLUDE_PATTERNS="*.test.ts,*.spec.ts,dist/*,node_modules/*,.expo/*,.angular-native/*"
+
+# Rules file to enforce during review
+RULES_FILE="GEMINI.md"
+
+# Strict mode (fail on ambiguous AI responses)
+STRICT_MODE="true"
+
+# Review timeout in seconds
+TIMEOUT="300"
+

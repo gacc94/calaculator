@@ -11,8 +11,9 @@ This repository is an Angular Native mobile application targeting iOS and Androi
 - **Native Runtime**: React Native 0.86.3 (Fabric renderer), React 19.2.3, Expo 57.0.26 (`expo`, `expo-status-bar`, `expo-system-ui`, `react-native-safe-area-context`)
 - **Language & Runtime**: TypeScript 6.0.3, Bun 1.4.3
 - **Testing**: Vitest v5 (`@ng-native/testing` in Node against a mock native layer — no simulator required)
-- **Bundler**: Metro (`metro.config.js`)
-- **Formatting & Style**: Prettier 3.9.10 (`.prettierrc`, `.prettierignore`) and EditorConfig (`.editorconfig`) configured with tabs, tab width 4, and max line length 120
+- **Bundler**: Metro (`metro.config.js` wrapped in `withTailwind`)
+- **Styling**: Tailwind CSS v4 (`@ng-native/tailwind`, `tailwindcss`, `@tailwindcss/cli`, `src/styles.css`)
+- **Formatting & Style**: Prettier 3.9.10 with `prettier-plugin-tailwindcss` (`.prettierrc`, `.prettierignore`) and EditorConfig (`.editorconfig`) configured with tabs, tab width 4, and max line length 120
 
 ---
 

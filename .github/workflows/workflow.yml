@@ -20,10 +20,22 @@ jobs:
                   echo "Sistema operativo: $(uname -a)"
                   echo "Directorio de trabajo: $(pwd)"
 
-            - name: Script en Python nativo
+            # Step 3: Provocar un fallo intencional
+            - name: 3. Simulación de fallo en pruebas
+              run: |
+                  echo "Ejecutando suite de pruebas críticas..."
+                  # Descomenta la línea de abajo para ver el workflow ponerse en ROJO:
+                  # exit 1
+
+            - name: 4. Comando tolerante a fallos
+              run: |
+                  # Si un comando grep no encuentra nada, devuelve exit code 1.
+                  # Con '|| true' forzamos que el exit code final sea 0:
+                  grep "palabra_inexistente" README.md || true
+                  echo "El pipeline continuó porque controlamos el exit code."
+
+            - name: 5. Inspección con Python
               shell: python
               run: |
-                  import platform
                   import sys
-                  print(f"Versión de Python: {sys.version}")
-                  print(f"Arquitectura: {platform.machine()}")
+                  print(f"Hola desde Python {sys.version_info.major}.{sys.version_info.minor}")

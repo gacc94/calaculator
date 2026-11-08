@@ -10,14 +10,40 @@ import { CalculatorMode } from './calculator-drawer';
 		class: 'gap-2.5 px-5 pb-8',
 	},
 	template: `
+
 		<!-- Scientific Row (Only visible in scientific mode) -->
 		@if (mode() === 'scientific') {
 			<view class="flex-row gap-2">
-				<app-calculator-button label="sin" variant="fn" [isCompact]="true" (press)="scientificOp.emit('sin')" />
-				<app-calculator-button label="cos" variant="fn" [isCompact]="true" (press)="scientificOp.emit('cos')" />
-				<app-calculator-button label="tan" variant="fn" [isCompact]="true" (press)="scientificOp.emit('tan')" />
-				<app-calculator-button label="√" variant="fn" [isCompact]="true" (press)="scientificOp.emit('sqrt')" />
-				<app-calculator-button label="π" variant="fn" [isCompact]="true" (press)="scientificOp.emit('pi')" />
+				<app-calculator-button
+					label="sin"
+					variant="fn"
+					[isCompact]="true"
+					(press)="scientificOp.emit('sin')"
+				/>
+				<app-calculator-button
+					label="cos"
+					variant="fn"
+					[isCompact]="true"
+					(press)="scientificOp.emit('cos')"
+				/>
+				<app-calculator-button
+					label="tan"
+					variant="fn"
+					[isCompact]="true"
+					(press)="scientificOp.emit('tan')"
+				/>
+				<app-calculator-button
+					label="√"
+					variant="fn"
+					[isCompact]="true"
+					(press)="scientificOp.emit('sqrt')"
+				/>
+				<app-calculator-button
+					label="π"
+					variant="fn"
+					[isCompact]="true"
+					(press)="scientificOp.emit('pi')"
+				/>
 			</view>
 		}
 

@@ -1,0 +1,21 @@
+name: Primer Workflow de Aprendizaje
+
+on:
+    push:
+        branches:
+            - main
+jobs:
+    environment-inspection:
+        name: '🚀 Compilación y Empaquetado de Frontend'
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 1. Imprimir saludo en el log
+              run: echo "¡Hola mundo desde GitHub Actions!"
+
+            - name: 2. Inspeccionar la máquina virtual
+              run: |
+                  echo "Usuario actual: $(whoami)"
+                  echo "Sistema operativo: $(uname -a)"
+                  echo "Directorio de trabajo: $(pwd)"

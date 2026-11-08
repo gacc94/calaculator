@@ -19,3 +19,11 @@ jobs:
                   echo "Usuario actual: $(whoami)"
                   echo "Sistema operativo: $(uname -a)"
                   echo "Directorio de trabajo: $(pwd)"
+
+            - name: Script en Python nativo
+              shell: python
+              run: |
+                  import platform
+                  import sys
+                  print(f"Versión de Python: {sys.version}")
+                  print(f"Arquitectura: {platform.machine()}")

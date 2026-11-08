@@ -25,7 +25,7 @@ jobs:
               run: |
                   echo "Ejecutando suite de pruebas críticas..."
                   # Descomenta la línea de abajo para ver el workflow ponerse en ROJO:
-                  # exit 1
+                   exit 1
 
             - name: 4. Comando tolerante a fallos
               run: |

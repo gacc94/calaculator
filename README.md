@@ -1,4 +1,4 @@
-# My Angular Native app
+# My Angular Native app - TEST
 
 An Angular app rendering real native views, created from `@ng-native/template`.
 

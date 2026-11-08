@@ -1,0 +1,24 @@
+name: Validación de Pull Requests
+
+on:
+    pull_request:
+        # types: opened (cuando se crea), synchronize (cuando subes un commit nuevo al PR)
+        types: [opened, synchronize, reopened]
+        branches:
+            - main
+
+jobs:
+    pr-verification:
+        name: 🔎 Validar Integración de PR
+        runs-on: ubuntu-latest
+        steps:
+            - name: Clonar código simulado
+              uses: actions/checkout@v4
+
+            - name: Inspeccionar metadatos del PR
+              run: |
+                  echo "Número de PR: ${{ github.event.pull_request.number }}"
+                  echo "Título del PR: ${{ github.event.pull_request.title }}"
+                  echo "Rama origen: ${{ github.head_ref }}"
+                  echo "Rama destino: ${{ github.base_ref }}"
+                  echo "¡El código se integró sin conflictos!"

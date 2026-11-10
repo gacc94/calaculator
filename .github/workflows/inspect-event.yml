@@ -1,0 +1,28 @@
+name: 🔍 Inspector de Payload de Eventos
+
+on:
+    push:
+    pull_request:
+    issues:
+        types: [opened]
+
+jobs:
+    inspeccionar:
+        name: Volcar y Analizar Payload
+        runs-on: ubuntu-latest
+        steps:
+            - name: 1. Mostrar la ruta del archivo
+              run: |
+                  echo "El payload está guardado en: $GITHUB_EVENT_PATH"
+
+            - name: 2. Volcar el JSON formateado con JQ
+              run: |
+                  echo "==================== INICIO DEL PAYLOAD ===================="
+                  cat "$GITHUB_EVENT_PATH" | jq '.'
+                  echo "===================== FIN DEL PAYLOAD ======================"
+
+            - name: 3. Extraer metadatos condicionales
+              run: |
+                  echo "Disparador: ${{ github.event_name }}"
+                  echo "Actor: ${{ github.actor }}"
+                  echo "Acción: ${{ github.event.action }}"

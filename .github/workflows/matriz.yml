@@ -1,0 +1,36 @@
+name: 🔢 Matriz de Compatibilidad Multi-Runtime
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    test-matrix:
+        name: Prueba en ${{ matrix.os }} con Node ${{ matrix.node-version }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: false # Para ver el resultado de todas
+            max-parallel: 2 # Corre de 2 en 2 para no saturar
+            matrix:
+                os: [ubuntu-latest] # (Usamos ubuntu para no consumir minutos extras)
+                node-version: [18, 20, 22]
+                include:
+                    # Agregamos una versión moderna experimental:
+                    - os: ubuntu-latest
+                      node-version: 23
+                      es_experimental: true
+
+        steps:
+            - name: 1. Descargar repositorio
+              uses: actions/checkout@v4
+
+            - name: 2. Configurar runtime dinámico
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: 3. Verificar versiones instaladas
+              run: |
+                  echo "Ejecutando en sistema: ${{ runner.os }}"
+                  echo "Versión de Node en este runner: $(node -v)"
+                  echo "Versión de NPM en este runner: $(npm -v)"

@@ -1,0 +1,32 @@
+name: 🕸️ Pipeline Orquestado con DAG
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    scan-static:
+        name: 1. Linter y Formato
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "Código limpio y verificado."
+
+    unit-testing:
+        name: 2. Pruebas Unitarias
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "Todos los tests pasaron exitosamente."
+
+    build:
+        name: 3. Compilar Binario
+        needs: [scan-static, unit-testing] # Espera a los dos primeros
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "Generando dist/bundle.js..."
+
+    deploy:
+        name: 4. Despliegue Simulado
+        needs: [build] # Espera a la compilación
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "🚀 Despliegue completado con éxito."

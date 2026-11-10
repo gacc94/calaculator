@@ -15,7 +15,7 @@ jobs:
             - name: 2. Tarea que simula un fallo deliberado
               run: |
                   echo "Ejecutando pruebas complejas..."
-                  # exit 1
+                  exit 1
 
             - name: 3. Solo se ejecuta si TODO va bien
               if: success()

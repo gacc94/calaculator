@@ -1,0 +1,26 @@
+name: 🛡️ Laboratorio de Timeouts y Tolerancia
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    security-lab:
+        name: Prueba de Límites
+        runs-on: ubuntu-latest
+        timeout-minutes: 1
+
+        steps:
+            - name: 1. Paso normal
+              run: echo "Iniciando proceso..."
+
+            - name: 2. Tarea tolerante a fallos
+              continue-on-error: true
+              run: |
+                  echo "Simulando advertencia de linter..."
+                  exit 1 # Falla, pero no romperá el pipeline
+
+            - name: 3. Proceso que se queda colgado (Bucle infinito simulado)
+              run: |
+                  echo "Esperando respuesta que nunca llega..."
+                  sleep 120

@@ -1,0 +1,33 @@
+name: 🎛️ Demostración de Condiciones if
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    control-estados:
+        name: Pruebas y Resiliencia
+        runs-on: ubuntu-latest
+        steps:
+            - name: 1. Tarea normal exitosa
+              run: echo "Paso 1 completado sin problemas."
+
+            - name: 2. Tarea que simula un fallo deliberado
+              run: |
+                  echo "Ejecutando pruebas complejas..."
+                  # exit 1
+
+            - name: 3. Solo se ejecuta si TODO va bien
+              if: success()
+              run: |
+                  echo "✅ Paso 3: Continuando porque no hubo errores."
+
+            - name: 4. Solo se ejecuta si HUBO UN FALLO
+              if: failure()
+              run: |
+                  echo "🚨 ALERTA: Algo falló arriba. Enviando reporte de emergencia..."
+
+            - name: 5. Se ejecuta SIEMPRE (Pase lo que pase)
+              if: always()
+              run: |
+                  echo "🧹 Teardown: Limpieza de recursos temporales completada siempre."

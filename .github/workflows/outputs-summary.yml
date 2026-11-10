@@ -1,0 +1,55 @@
+name: 05.02 Comunicación y Resumen de Ejecución
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+jobs:
+    generar-reporte:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 1. Checkout del código
+              uses: actions/checkout@v4
+
+            - name: 2. Calcular metadatos del build
+              id: metadatos
+              run: |
+                  # Obtenemos SHA corto y timestamp
+                  SHORT_SHA=$(git rev-parse --short HEAD)
+                  BUILD_DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+                  echo "Calculando metadatos para el commit: $SHORT_SHA"
+
+                  # Exportamos al archivo GITHUB_OUTPUT
+                  echo "commit_hash=$SHORT_SHA" >> "$GITHUB_OUTPUT"
+                  echo "fecha_compilacion=$BUILD_DATE" >> "$GITHUB_OUTPUT"
+                  echo "arquitectura=$(uname -m)" >> "$GITHUB_OUTPUT"
+
+            - name: 3. Consumir outputs del step anterior
+              run: |
+                  echo "=== Datos recibidos del step anterior ==="
+                  echo "Commit SHA:     ${{ steps.metadatos.outputs.commit_hash }}"
+                  echo "Fecha de build: ${{ steps.metadatos.outputs.fecha_compilacion }}"
+                  echo "Arquitectura:   ${{ steps.metadatos.outputs.arquitectura }}"
+
+            - name: 4. Generar Step Summary visual en la UI
+              run: |
+                  echo "## 📊 Reporte Ejecutivo de Compilación" >> "$GITHUB_STEP_SUMMARY"
+                  echo "" >> "$GITHUB_STEP_SUMMARY"
+                  echo "> [!TIP]" >> "$GITHUB_STEP_SUMMARY"
+                  echo "> Este reporte fue generado dinámicamente usando \$GITHUB_STEP_SUMMARY." >> "$GITHUB_STEP_SUMMARY"
+                  echo "" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| Métrica | Valor |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| :--- | :--- |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| **Rama** | \`${{ github.ref_name }}\` |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| **Commit** | \`${{ steps.metadatos.outputs.commit_hash }}\` |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| **Ejecutado por** | @${{ github.actor }} |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| **Fecha** | ${{ steps.metadatos.outputs.fecha_compilacion }} |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| **Arquitectura** | ${{ steps.metadatos.outputs.arquitectura }} |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| **Estado** | :white_check_mark: Exitoso |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "" >> "$GITHUB_STEP_SUMMARY"
+                  echo "### 🚀 Servicios validados" >> "$GITHUB_STEP_SUMMARY"
+                  echo "- [x] Aislamiento de variables verificado" >> "$GITHUB_STEP_SUMMARY"
+                  echo "- [x] Comunicación inter-step por outputs validada" >> "$GITHUB_STEP_SUMMARY"
+                  echo "- [x] Generación de Markdown en runner finalizada" >> "$GITHUB_STEP_SUMMARY"

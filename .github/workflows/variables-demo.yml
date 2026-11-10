@@ -22,11 +22,11 @@ jobs:
 
             - name: 2. Demostrar precedencia de variables
               run: |
-                  echo "Canal global: $CANAL_DESPLIEGUE"
-                  echo "Modo de job: $MODO"
+                  echo "Canal global: ${{ env.CANAL_DESPLIEGUE }}"
+                  echo "Modo de job: ${{ env.MODO }}"
 
             - name: 3. Sobreescribir variable en un step
               env:
                   MODO: 'super-turbo'
               run: |
-                  echo "Modo modificado en este step: $MODO"
+                  echo "Modo modificado en este step: ${{ env.MODO }}"

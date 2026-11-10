@@ -1,0 +1,32 @@
+name: 🌐 Laboratorio de Variables y Contextos
+
+on:
+    push:
+        branches: [main]
+
+# Variable global a nivel workflow
+env:
+    CANAL_DESPLIEGUE: 'canary'
+
+jobs:
+    demostracion-variables:
+        name: Inspección de Variables y Precedencia
+        runs-on: ubuntu-latest
+        env:
+            MODO: 'estándar'
+
+        steps:
+            - name: 1. Leer Repository Variable de GitHub Settings
+              run: |
+                  echo "Empresa configurada: ${{ vars.NOMBRE_EMPRESA }}"
+
+            - name: 2. Demostrar precedencia de variables
+              run: |
+                  echo "Canal global: $CANAL_DESPLIEGUE"
+                  echo "Modo de job: $MODO"
+
+            - name: 3. Sobreescribir variable en un step
+              env:
+                  MODO: 'super-turbo'
+              run: |
+                  echo "Modo modificado en este step: $MODO"

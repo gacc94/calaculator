@@ -17,7 +17,7 @@ AppRegistry.registerRunnable('main', ({ rootTag }: { rootTag: number | string })
 
 	const app = mount(Number(rootTag), App, getFabricUIManager(), {
 		globalStyles: tailwind,
-		// Colours, as the integers the platform wants.
+		// Colors, as the integers the platform wants.
 		processColor,
 		// What `@media` resolves against. Without it every media query is false and a responsive
 		// layout renders as its smallest case.

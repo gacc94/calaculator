@@ -1,6 +1,13 @@
 name: Validación de Pull Requests
 
 on:
+    schedule:
+        - cron: '0 0 * * *' # Ejecutar diariamente a medianoche
+    push:
+        branches:
+            - main
+            - 'release/*'
+            - 'hotfix/*'
     pull_request:
         # types: opened (cuando se crea), synchronize (cuando subes un commit nuevo al PR)
         types: [opened, synchronize, reopened]
@@ -13,7 +20,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Clonar código simulado
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7.0.1
 
             - name: Inspeccionar metadatos del PR
               run: |

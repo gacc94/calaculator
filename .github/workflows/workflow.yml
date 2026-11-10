@@ -38,4 +38,4 @@ jobs:
               shell: python
               run: |
                   import sys
-                  print(f"Hola desde Python {sys.version_info.major}.{sys.version_info.minor}")
+                  cat "$GITHUB_EVENT_PATH"

@@ -1,0 +1,61 @@
+name: 05.04 Transferencia de Artefactos entre Jobs
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+jobs:
+    # ==========================================
+    # JOB 1: Compilar y Subir Artefacto
+    # ==========================================
+    build-app:
+        name: 🔨 1. Compilar y Generar Bundle
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout del repositorio
+              uses: actions/checkout@v4
+
+            - name: Simular proceso de compilación (Build)
+              run: |
+                  mkdir -p dist
+                  echo "console.log('Calculadora v1.0 lista');" > dist/bundle.js
+                  echo '{"version": "1.0.0", "build": "${{ github.run_number }}"}' > dist/metadata.json
+
+                  echo "Archivos generados en ./dist:"
+                  ls -la dist/
+
+            - name: Subir carpeta ./dist como artefacto a GitHub
+              uses: actions/upload-artifact@v4
+              with:
+                  name: app-distributable
+                  path: dist/
+                  retention-days: 1 # Guardar por 1 día para no gastar cuota
+
+    # ==========================================
+    # JOB 2: Descargar Artefacto y Desplegar
+    # ==========================================
+    deploy-app:
+        name: 🚀 2. Desplegar Artefacto
+        needs: build-app # 👈 Espera obligatoria al Job 1
+        runs-on: ubuntu-latest
+
+        steps:
+            # Nota: ¡No necesitamos actions/checkout aquí si solo requerimos el artefacto compilado!
+            - name: Descargar el artefacto generado
+              uses: actions/download-artifact@v4
+              with:
+                  name: app-distributable
+                  path: bundle-descargado
+
+            - name: Verificar archivos recibidos en la nueva máquina
+              run: |
+                  echo "=== Contenido recibido en Runner 2 ==="
+                  ls -la bundle-descargado/
+
+                  echo "=== Leyendo metadata transferida ==="
+                  cat bundle-descargado/metadata.json
+
+                  echo "=== Leyendo bundle ==="
+                  cat bundle-descargado/bundle.js

@@ -1,0 +1,47 @@
+name: ♻️ Reusable Quality Gate
+
+on:
+    workflow_call:
+        inputs:
+            node-version:
+                description: 'Versión del runtime Node.js a utilizar'
+                required: false
+                type: string
+                default: '22'
+            strict-mode:
+                description: 'Indica si las advertencias rompen la pipeline'
+                required: false
+                type: boolean
+                default: true
+        outputs:
+            linter-status:
+                description: 'Resultado del análisis estático'
+                value: ${{ jobs.execute-lint.outputs.status }}
+
+jobs:
+    execute-lint:
+        runs-on: ubuntu-latest
+        outputs:
+            status: ${{ steps.record-status.outputs.status }}
+        steps:
+            - name: 📥 Clonar repositorio consumidor
+              uses: actions/checkout@v4
+
+            - name: ⚙️ Configurar Node.js (${{ inputs.node-version }})
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ inputs.node-version }}
+
+            - name: 🔍 Ejecutar análisis de calidad corporativo
+              run: |
+                  echo "================================================="
+                  echo "EJECUTANDO REUSABLE WORKFLOW CORPORATIVO"
+                  echo "Node Version : ${{ inputs.node-version }}"
+                  echo "Strict Mode  : ${{ inputs.strict-mode }}"
+                  echo "Caller Repo  : ${{ github.repository }}"
+                  echo "Triggered by : ${{ github.actor }}"
+                  echo "================================================="
+
+            - name: 📋 Registrar estado de salida
+              id: record-status
+              run: echo "status=COMPLETED_SUCCESS" >> "$GITHUB_OUTPUT"

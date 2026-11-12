@@ -1,0 +1,24 @@
+name: 🚀 App Consumer Pipeline
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+jobs:
+    # Invocación del Reusable Workflow a nivel de Job
+    call-enterprise-linter:
+        uses: ./.github/workflows/reusable-lint.yml
+        with:
+            node-version: '22'
+            strict-mode: false
+        secrets: inherit
+
+    # Job dependiente que consume el output generado por el Reusable Workflow
+    post-lint-summary:
+        needs: call-enterprise-linter
+        runs-on: ubuntu-latest
+        steps:
+            - name: 📊 Validar resultado del Reusable Workflow
+              run: |
+                  echo "El reusable workflow finalizó con status: ${{ needs.call-enterprise-linter.outputs.linter-status }}"

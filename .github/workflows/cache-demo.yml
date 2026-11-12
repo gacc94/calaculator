@@ -1,0 +1,52 @@
+name: 05.05 Optimizacion con Cache
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+jobs:
+    probar-cache:
+        name: ⚡ Validar Cache de Dependencias
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 1. Checkout del repositorio
+              uses: actions/checkout@v7
+
+            - name: 2. Restaurar o Guardar Carpeta de Cache
+              id: mi-cache
+              uses: actions/cache@v6.1.0
+              with:
+                  # Carpeta que deseamos guardar en la nube
+                  path: vendor_cache
+                  # Clave exacta calculada a partir del commit o archivo de bloqueo
+                  # Para esta demo usamos una clave fija versionada:
+                  key: ${{ runner.os }}-modulos-v1
+                  # Clave de respaldo si no hay coincidencia exacta:
+                  restore-keys: |
+                      ${{ runner.os }}-modulos-
+
+            - name: 3. Instalar o Descargar Dependencias (Solo si hubo Cache MISS)
+              if: steps.mi-cache.outputs.cache-hit != 'true'
+              run: |
+                  echo "⚠️ Cache MISS: La carpeta no existía en la nube de GitHub."
+                  echo "Simulando descarga pesada de paquetes (esperando 5 segundos)..."
+                  sleep 5
+                  mkdir -p vendor_cache
+                  echo "Librería Matemática compilada" > vendor_cache/math-engine.bin
+                  echo "Cache creada en: $(date)" > vendor_cache/timestamp.txt
+                  echo "✅ Dependencias instaladas y listas para ser guardadas."
+
+            - name: 4. Reutilizar Dependencias (Si hubo Cache HIT)
+              if: steps.mi-cache.outputs.cache-hit == 'true'
+              run: |
+                  echo "⚡ CACHE HIT! Las dependencias se restauraron instantáneamente desde la nube."
+                  echo "=== Contenido recuperado de la caché ==="
+                  ls -la vendor_cache/
+                  cat vendor_cache/timestamp.txt
+
+            - name: 5. Compilar la aplicación usando las dependencias
+              run: |
+                  echo "Compilando proyecto con el motor:"
+                  cat vendor_cache/math-engine.bin

@@ -1,0 +1,23 @@
+name: 🧩 Demostración de Composite Action
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 📥 Clonar repositorio
+              uses: actions/checkout@v4
+
+            - name: 🚀 Invocar nuestra Composite Action local
+              id: setup
+              uses: ./.github/actions/setup-app
+              with:
+                  node-version: '24'
+
+            - name: 🔍 Validar output devuelto por la Composite Action
+              run: |
+                  echo "La Composite Action reportó Node version: ${{ steps.setup.outputs.installed-node }}"

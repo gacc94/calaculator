@@ -1,0 +1,37 @@
+name: '📦 Setup App Environment'
+description: 'Prepara el runtime Node.js, muestra diagnósticos del runner y genera un timestamp'
+
+inputs:
+    node-version:
+        description: 'Versión de Node.js a configurar'
+        required: false
+        default: '22'
+
+outputs:
+    installed-node:
+        description: 'Versión real instalada de Node'
+        value: ${{ steps.get-version.outputs.version }}
+
+runs:
+    using: 'composite'
+    steps:
+        - name: ⚙️ Configurar Node.js (${{ inputs.node-version }})
+          uses: actions/setup-node@v4
+          with:
+              node-version: ${{ inputs.node-version }}
+
+        - name: 📋 Diagnóstico del sistema y runner
+          shell: bash # <-- ¡Obligatorio en steps de tipo run dentro de composite!
+          run: |
+              echo "============================================="
+              echo "COMPOSITE ACTION: SETUP DE ENTORNO COMPLETADO"
+              echo "Kernel OS      : $(uname -srm)"
+              echo "Node detectado : $(node -v)"
+              echo "NPM detectado  : $(npm -v)"
+              echo "Ruta actual    : $(pwd)"
+              echo "============================================="
+
+        - name: 🏷️ Capturar versión para output
+          id: get-version
+          shell: bash # <-- ¡Obligatorio!
+          run: echo "version=$(node -v)" >> "$GITHUB_OUTPUT"

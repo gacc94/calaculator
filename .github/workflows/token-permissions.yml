@@ -1,0 +1,59 @@
+name: 05.03 GITHUB_TOKEN y Permisos Minimos
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+# 🔒 Declaramos permisos mínimos a nivel global: solo lectura de código
+permissions:
+    contents: read
+
+jobs:
+    crear-issue-notificacion:
+        runs-on: ubuntu-latest
+        # 🔓 Elevamos permisos ÚNICAMENTE para este job: crear issues
+        permissions:
+            contents: read
+            issues: write
+
+        steps:
+            - name: 1. Checkout del código
+              uses: actions/checkout@v4
+
+            - name: 2. Inspeccionar permisos del token con GitHub CLI
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  echo "=== Verificando identidad del token ==="
+                  gh auth status
+
+            - name: 3. Crear un Issue automático desde el pipeline
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  FECHA=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+                  gh issue create \
+                    --title "🚀 Despliegue registrado: commit ${{ github.sha }}" \
+                    --body "Este issue fue creado automáticamente por **GitHub Actions** en la ejecución #${{ github.run_number }}.
+
+                  - **Autor del commit:** @${{ github.actor }}
+                  - **Rama:** \`${{ github.ref_name }}\`
+                  - **Fecha UTC:** $FECHA
+                  - **Permiso utilizado:** \`issues: write\`"
+
+            - name: Demo de comandos de reporte
+              run: |
+                  # 1. Poner una anotación visible en la UI
+                  echo "::notice file=README.md,line=1::Pipeline ejecutado exitosamente por $GITHUB_ACTOR"
+
+                  # 2. Agrupar logs largos
+                  echo "::group::🔍 Diagnóstico del Entorno"
+                  echo "Runner OS: $RUNNER_OS ($RUNNER_ARCH)"
+                  echo "Commit:    $GITHUB_SHA"
+                  echo "Run ID:    $GITHUB_RUN_ID"
+                  echo "::endgroup::"
+
+                  # 3. Persistir una variable para los siguientes steps
+                  echo "BUILD_ID=build-${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
